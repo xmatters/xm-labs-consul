@@ -1,6 +1,6 @@
 # Consul
 
-This integration lets you take in checks from Consul and alert users.
+This integration lets you alert users in xMatters when there is a critical check in [Consul](https://www.consul.io/).
 
 
 ---------
