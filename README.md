@@ -17,13 +17,12 @@ This integration lets you take in checks from Consul and alert users.
 * [consul.png](/consul.png) - Consul logo
 
 # How it works
-The step is triggered by a watch in Consul. This watch gets the current alerts in Consul.
-
+The step is triggered by a [watch](https://www.consul.io/docs/agent/watches.html) in Consul. This watch finds if certain [checks](https://www.consul.io/docs/agent/checks.html) are critical in Consul.
 
 # Installation
 
 ## Consul Setup
-1. Create a Watch in Consul. This is an example.
+1. Create a [Watch](https://www.consul.io/docs/agent/watches.html) in Consul. This is an example.
 ```json
 {
     "watches": [{
@@ -33,11 +32,12 @@ The step is triggered by a watch in Consul. This watch gets the current alerts i
     }]
 }
 ```
+Updating the `state` changes at which level it searches for checks.
 In the args, point it to a script that will call xMatters with a payload.
 
 2. Create a script for the watch
 Here is an example for a script
-```json
+```bash
 OUTPUT=$(curl -G localhost:8500/v1/agent/checks --data-urlencode 'filter=Status != passing')
 
 curl -X POST -H "Content-Type: application/json" -d "$OUTPUT" "https://instance.xmatters.com/api/integration/1/functions/UUID/triggers?apiKey=KEY"
@@ -50,6 +50,7 @@ Make sure to change the URL on the curl request to point at your http trigger in
 2. Navigate to the Workflows tab of your xMatters instance
 3. Click Import, and select the zip file you just downloaded
 4. Fill in the recipients in the `xMatters Create Event` step
+5. Get the HTTP Trigger URL and put it in the script that the watch in Consul runs.
 
 
 ## Usage
@@ -57,7 +58,7 @@ The **Inbound from Consul** HTTP trigger will output the message sent from the s
 
 
 ## Troubleshooting
-See if inside the consul log it is sending requests to xMatters. These should look like: `{"requestId":"ID HERE"}`
+See if inside the Consul log it is sending requests to xMatters. These should look like: `{"requestId":"ID HERE"}`
 
 Look in the Activity Log in xMatters to see if the steps are being run and succeeding.
 
