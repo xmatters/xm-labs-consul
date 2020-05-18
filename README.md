@@ -14,7 +14,7 @@ This integration lets you take in checks from Consul and alert users.
 # Files
 
 * [Consul.zip](Consul.zip) - Workflow zip file with the step and example flow
-* [Consul.png](/Consul.png) - Consul logo
+* [consul.png](/consul.png) - Consul logo
 
 # How it works
 The step is triggered by a watch in Consul. This watch gets the current alerts in Consul.
