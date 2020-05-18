@@ -25,11 +25,13 @@ The step is triggered by a watch in Consul. This watch gets the current alerts i
 ## Consul Setup
 1. Create a Watch in Consul. This is an example.
 ```json
-{"watches": [{
-	"type": "checks",
-	"state": "critical",
-	"args": ["/bin/bash", "/home/user/watch.sh"]
-}]}
+{
+    "watches": [{
+        "type": "checks",
+        "state": "critical",
+        "args": ["/bin/bash", "/home/user/watch.sh"]
+    }]
+}
 ```
 In the args, point it to a script that will call xMatters with a payload.
 
